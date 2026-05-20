@@ -16,6 +16,7 @@ import { useToastStore } from '../store/useToastStore'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
 import { Input } from '../components/ui/Input'
+import { RewardBalanceCard } from '../components/ui/RewardBalanceCard'
 
 const skinTypesList = ['Dry', 'Oily', 'Combination Sensitive', 'Normal', 'Acne-Prone']
 const hairTypesList = ['Fine Wavy', 'Thick Straight', 'Coily', 'Dry/Damaged', 'Color-Treated']
@@ -51,8 +52,8 @@ export function Profile() {
   }
 
   const handleAddPointsSimulate = () => {
-    addPoints(150)
-    showToast('Reward Balance updated: +150 points')
+    addPoints(50)
+    showToast('Reward Balance updated: +₹50')
   }
 
   return (
@@ -65,7 +66,7 @@ export function Profile() {
       {/* HEADER SECTION */}
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-clay">Account & Rewards</p>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-clay">Your account</p>
           <h1 className="mt-1 font-display text-4xl font-bold text-ink dark:text-white lg:text-5xl">Your Account</h1>
         </div>
       </div>
@@ -74,7 +75,7 @@ export function Profile() {
         {/* LEFT COLUMN: HERO USER CARD & QUICK ACTIONS */}
         <div className="space-y-6 lg:col-span-1">
           {/* USER CARD */}
-          <Card className="overflow-hidden border border-white/40 bg-white/60 p-6 backdrop-blur-md dark:border-stone-800 dark:bg-stone-900/60" hover={false}>
+          <Card className="overflow-hidden border border-stone-100 bg-white p-6 dark:border-stone-800 dark:bg-stone-900" hover={false}>
             <div className="flex flex-col items-center text-center">
               <div className="relative group cursor-pointer">
                 <img
@@ -91,26 +92,8 @@ export function Profile() {
               <p className="text-sm text-stone-500">{user?.email}</p>
             </div>
 
-            {/* Loyalty points card nested */}
-            <div className="mt-6 rounded-2xl bg-cream/50 p-4 dark:bg-stone-800/40">
-              <div className="flex items-center justify-between text-sm">
-                <span className="font-bold text-stone-600 dark:text-stone-300">Reward Balance</span>
-                <span className="font-black text-ink dark:text-white">{user?.points} Points</span>
-              </div>
-              
-              <p className="mt-3 text-xs text-stone-500 leading-relaxed">
-                You have <strong className="text-moss">{user?.points} points</strong>. Use them at checkout to save on face wash, body wash, and combo orders.
-              </p>
-
-              <Button
-                variant="secondary"
-                size="sm"
-                className="mt-4 h-9 w-full text-xs"
-                onClick={handleAddPointsSimulate}
-              >
-                <Sparkles size={12} />
-                Add Demo Reward (+150 pts)
-              </Button>
+            <div className="mt-6">
+              <RewardBalanceCard balance={user?.points} onSimulate={handleAddPointsSimulate} />
             </div>
           </Card>
 
@@ -208,7 +191,7 @@ export function Profile() {
               <div>
                 <span className="text-sm font-semibold text-stone-700 dark:text-stone-300">Gender</span>
                 <div className="mt-2 flex gap-3">
-                  {['Female', 'Male', 'Non-Binary', 'Rather not say'].map((opt) => (
+                  {['Male', 'Female', 'Rather not to say'].map((opt) => (
                     <button
                       key={opt}
                       type="button"

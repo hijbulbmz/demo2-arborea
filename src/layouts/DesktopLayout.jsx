@@ -58,7 +58,7 @@ export function DesktopLayout() {
                   </p>
                   <span className="inline-flex items-center gap-0.5 rounded-full bg-moss/10 px-2 py-0.5 text-[10px] font-black text-moss dark:bg-moss/20 uppercase tracking-wider">
                     <Award size={10} />
-                    Reward Balance: {user?.points} pts
+                    Reward Balance: ₹{user?.points}
                   </span>
                 </div>
               </div>

@@ -38,8 +38,10 @@ export function Cart() {
             transition={{ duration: 0.18 }}
             className="flex gap-3 rounded-brand bg-white p-3 ring-1 ring-stone-100"
           >
-            <Link to={`/product/${item.productId}`}>
-              <img src={item.product.image} alt={item.product.name} className="h-24 w-20 rounded-xl object-cover sm:h-28 sm:w-24" />
+            <Link to={`/product/${item.productId}`} className="shrink-0">
+              <div className="aspect-[4/5] h-20 w-16 overflow-hidden rounded-xl bg-[#f6efe5]">
+                <img src={item.product.image} alt={item.product.name} className="h-full w-full object-cover" />
+              </div>
             </Link>
             <div className="min-w-0 flex-1">
               <p className="text-xs font-bold uppercase tracking-wide text-moss">{item.product.category}</p>

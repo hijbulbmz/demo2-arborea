@@ -6,7 +6,7 @@ const makeOrderId = () => `ARB-${Math.floor(10000 + Math.random() * 89999)}`
 export const useAppStore = create((set) => ({
   user: users[0],
   products,
-  wishlist: ['vitamin-c-face-wash-100ml'],
+  wishlist: ['neem-face-wash-100ml'],
   cart: [
     {
       productId: 'neem-face-wash-100ml',
@@ -24,7 +24,8 @@ export const useAppStore = create((set) => ({
   quickViewProductId: null,
   isSearchOpen: false,
   isCartDrawerOpen: false,
-  recentSearches: ['Vitamin C', 'Neem', 'Aloe'],
+  cartBump: 0,
+  recentSearches: ['Neem', 'Aloe', 'Rose'],
   openQuickView: (productId) => set({ quickViewProductId: productId }),
   closeQuickView: () => set({ quickViewProductId: null }),
   openSearch: () => set({ isSearchOpen: true }),
@@ -76,6 +77,7 @@ export const useAppStore = create((set) => ({
             item.productId === productId ? { ...item, quantity: item.quantity + 1 } : item,
           )
         : [...state.cart, { productId, quantity: 1 }],
+      cartBump: state.cartBump + 1,
     })),
   removeFromCart: (productId) =>
     set((state) => ({

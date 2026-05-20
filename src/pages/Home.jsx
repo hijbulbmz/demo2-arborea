@@ -17,6 +17,7 @@ import {
 import { motion } from 'framer-motion'
 import { ProductCard } from '../components/commerce/ProductCard'
 import { SectionHeader } from '../components/commerce/SectionHeader'
+import { ArboreaShowcase, InteractionHighlights } from '../components/sections/MarketingSections'
 import { SEO } from '../components/ui/SEO'
 import { products } from '../data'
 import { fadeUp, staggerContainer } from '../utils/animations'
@@ -41,31 +42,26 @@ const concerns = [
 
 const offerCards = [
   ['Buy 2 Get 1', 'On selected face washes', 'Use ARBOREA3'],
-  ['Combo Savings', 'Save up to 35% on kits', 'Daily value packs'],
-  ['Festival Offers', 'Warm gifting under INR 699', 'Limited period'],
-  ['Summer Care Essentials', 'Cooling aloe and lemon picks', 'Beat the heat'],
+  ['Free shipping', 'Orders above INR 499', 'Pan-India'],
+  ['Festival offers', 'Family packs under INR 699', 'Limited period'],
+  ['Summer care', 'Cooling aloe and lemon picks', 'Beat the heat'],
 ]
 
 const sections = [
   {
-    eyebrow: 'Best for Summer',
-    title: 'Cooling care for Indian heat',
-    products: products.filter((item) => ['summer-essentials-combo', 'lemon-body-wash-250ml', 'aloe-vera-face-wash-100ml', 'aloe-body-wash-250ml'].includes(item.id)),
+    eyebrow: 'Customer Favorites',
+    title: 'Best Selling Products',
+    products: products.filter((item) => item.isBestseller),
   },
   {
-    eyebrow: 'Daily Essentials',
-    title: 'Simple routines under INR 500',
-    products: products.filter((item) => ['neem-face-wash-100ml', 'vitamin-c-face-wash-100ml', 'tea-tree-face-wash-100ml', 'sandal-body-wash-250ml'].includes(item.id)),
+    eyebrow: 'Gentle Cleansers',
+    title: 'Face Wash Collection',
+    products: products.filter((item) => item.category === 'Face Wash'),
   },
   {
-    eyebrow: 'Family Favorites',
-    title: 'Trusted picks for every bathroom shelf',
-    products: products.filter((item) => ['aloe-body-wash-500ml', 'rose-body-wash-250ml', 'neem-face-wash-200ml', 'coffee-body-wash-250ml'].includes(item.id)),
-  },
-  {
-    eyebrow: 'Budget Combos',
-    title: 'More care, better savings',
-    products: products.filter((item) => ['budget-combo-glow-duo', 'summer-essentials-combo', 'acne-purifying-combo'].includes(item.id)),
+    eyebrow: 'Daily showers',
+    title: 'Body Wash Collection',
+    products: products.filter((item) => item.category === 'Body Wash'),
   },
 ]
 
@@ -84,7 +80,7 @@ function EcommerceHero() {
         initial="hidden"
         animate="visible"
         variants={staggerContainer}
-        className="px-5 py-6 sm:px-8 sm:py-8 lg:px-10 lg:py-12"
+        className="px-5 py-5 sm:px-8 sm:py-7 lg:px-10 lg:py-10"
       >
         <motion.span
           variants={fadeUp}
@@ -93,7 +89,7 @@ function EcommerceHero() {
           <Sparkles size={14} className="text-turmeric" />
           Modern Indian personal care
         </motion.span>
-        <motion.h1 variants={fadeUp} className="mt-4 max-w-2xl font-display text-3xl font-extrabold leading-tight text-ink sm:text-5xl lg:text-6xl">
+        <motion.h1 variants={fadeUp} className="mt-3 max-w-2xl font-display text-2xl font-extrabold leading-tight text-ink sm:text-4xl lg:text-5xl">
           Everyday skin and body care made for Indian routines.
         </motion.h1>
         <motion.p variants={fadeUp} className="mt-3 max-w-xl text-sm font-semibold leading-6 text-stone-600 sm:text-base sm:leading-7">
@@ -108,11 +104,11 @@ function EcommerceHero() {
             Shop Bestsellers
           </Link>
           <Link
-            to="/shop"
+            to="/shop?category=Body+Wash"
             className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-extrabold text-ink ring-1 ring-stone-200 transition hover:bg-cream"
           >
             <ArrowRight size={18} />
-            Explore Combos
+            Shop Body Wash
           </Link>
         </motion.div>
         <motion.div variants={fadeUp} className="mt-6 hidden gap-2 text-center sm:grid sm:grid-cols-3">
@@ -127,7 +123,7 @@ function EcommerceHero() {
         <img
           src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=1100&q=80"
           alt="Arborea personal care products"
-          className="aspect-[4/3] w-full rounded-brand object-cover lg:aspect-[4/5]"
+          className="aspect-[5/4] max-h-[220px] w-full rounded-brand object-cover sm:max-h-none sm:aspect-[4/3] lg:aspect-[4/5] lg:max-h-none"
           loading="eager"
         />
         <div className="absolute bottom-9 left-8 right-8 rounded-brand bg-white/95 p-3 ring-1 ring-stone-100">
@@ -209,7 +205,7 @@ function ProductRail({ eyebrow, title, items }) {
         className="hide-scrollbar flex snap-x gap-5 overflow-x-auto pb-2 lg:grid lg:grid-cols-4 lg:overflow-visible"
       >
         {items.map((product) => (
-          <div key={product.id} className="min-w-[84%] snap-center sm:min-w-[280px] lg:min-w-0">
+          <div key={product.id} className="min-w-[72%] snap-center sm:min-w-[240px] lg:min-w-0">
             <ProductCard product={product} />
           </div>
         ))}
@@ -257,7 +253,6 @@ function HomeFooter() {
           <div className="mt-3 grid gap-2 text-sm font-semibold text-stone-600">
             <span>Face Wash</span>
             <span>Body Wash</span>
-            <span>Combo Kits</span>
           </div>
         </div>
         <div>
@@ -283,16 +278,18 @@ function HomeFooter() {
 
 export function Home() {
   return (
-    <div className="space-y-9 lg:space-y-10">
+    <div className="space-y-8 lg:space-y-9">
       <SEO
         title="Indian Personal Care Essentials"
-        description="Shop Arborea face wash, body wash, and combo kits made for Indian skin, daily routines, and trusted family care."
+        description="Shop Arborea face wash and body wash made for Indian skin, daily routines, and trusted family care."
       />
       <AnnouncementBar />
       <EcommerceHero />
       <TrustGrid />
       <ShopByConcern />
       <OfferStrip />
+      <ArboreaShowcase />
+      <InteractionHighlights />
       {sections.map((section) => (
         <ProductRail key={section.title} eyebrow={section.eyebrow} title={section.title} items={section.products} />
       ))}

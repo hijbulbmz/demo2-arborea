@@ -32,7 +32,7 @@ export function Notifications() {
     { id: 'order', label: 'Orders' },
     { id: 'offer', label: 'Offers' },
     { id: 'wishlist', label: 'Wishlist' },
-    { id: 'recommendation', label: 'Regimen' },
+    { id: 'recommendation', label: 'Tips' },
   ]
 
   // Filter
@@ -76,7 +76,7 @@ export function Notifications() {
       {/* Title */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-clay">Real-Time Canvas</p>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-clay">Updates</p>
           <h1 className="mt-1 font-display text-4xl font-bold text-ink dark:text-white lg:text-5xl">Notifications</h1>
         </div>
         {notifications.some((n) => !n.read) && (

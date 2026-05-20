@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 export function SEO({ title, description, image, type = 'website' }) {
   useEffect(() => {
     // Set dynamic page title
-    const formattedTitle = title ? `${title} | Arborea Skincare` : 'Arborea | Luxury Botanical Care'
+    const formattedTitle = title ? `${title} | Arborea` : 'Arborea | Indian Personal Care'
     document.title = formattedTitle
 
     // Update meta description
@@ -13,7 +13,7 @@ export function SEO({ title, description, image, type = 'website' }) {
       metaDescription.setAttribute('name', 'description')
       document.head.appendChild(metaDescription)
     }
-    const finalDesc = description || 'Premium organic personal care and botanical skincare rituals crafted for glow, hydration, and everyday confidence.'
+    const finalDesc = description || 'Practical face wash and body wash essentials made for Indian daily care routines.'
     metaDescription.setAttribute('content', finalDesc)
 
     // Set mobile browser theme color (elegant botanical moss)

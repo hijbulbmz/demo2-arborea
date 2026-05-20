@@ -5,7 +5,7 @@
     "paymentMethod": "UPI",
     "total": 768,
     "items": [
-      { "productId": "vitamin-c-face-wash-100ml", "quantity": 1 },
+      { "productId": "neem-face-wash-100ml", "quantity": 1 },
       { "productId": "sandal-body-wash-250ml", "quantity": 1 }
     ],
     "placedAt": "2026-05-04",
@@ -43,7 +43,7 @@
     "paymentMethod": "Wallets",
     "total": 649,
     "items": [
-      { "productId": "summer-essentials-combo", "quantity": 1 }
+      { "productId": "neem-rose-combo", "quantity": 1 }
     ],
     "placedAt": "2026-05-19",
     "deliveryEta": "Expected by May 24",
@@ -55,7 +55,7 @@
     "paymentMethod": "Net Banking",
     "total": 499,
     "items": [
-      { "productId": "budget-combo-glow-duo", "quantity": 1 }
+      { "productId": "charcoal-duo-combo", "quantity": 1 }
     ],
     "placedAt": "2026-05-20",
     "deliveryEta": "Expected in 2 to 5 days",

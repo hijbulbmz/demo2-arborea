@@ -29,16 +29,12 @@
     min-height: 100vh;
     margin: 0;
     overflow-x: hidden;
-    background:
-      linear-gradient(180deg, rgba(250, 246, 240, 0.94), rgba(255, 253, 249, 1) 48%),
-      #faf6f0;
+    background: #faf6f0;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   .dark body {
-    background:
-      linear-gradient(180deg, rgba(12, 11, 10, 0.95), rgba(20, 19, 18, 1) 48%),
-      #0c0b0a;
+    background: #0c0b0a;
   }
 
   button,
@@ -60,7 +56,7 @@
   }
 
   .glass-panel {
-    @apply border border-white/70 bg-white/75 shadow-soft backdrop-blur-xl;
+    @apply border border-stone-100 bg-white shadow-sm;
   }
 
   .hide-scrollbar {

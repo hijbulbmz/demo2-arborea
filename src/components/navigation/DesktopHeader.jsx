@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useAuthStore } from '../../store/useAuthStore'
 import { useAppStore } from '../../store/useAppStore'
+import { useCartCount } from '../../hooks/useCartCount'
 import { primaryNav } from './navItems'
 
 export function DesktopHeader({ onMenu }) {
@@ -10,9 +11,11 @@ export function DesktopHeader({ onMenu }) {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
   const openSearch = useAppStore((state) => state.openSearch)
   const openCartDrawer = useAppStore((state) => state.openCartDrawer)
+  const cartCount = useCartCount()
+  const cartBump = useAppStore((state) => state.cartBump)
 
   return (
-    <header className="sticky top-0 z-30 hidden border-b border-stone-100 dark:border-stone-850/80 bg-[#fbf7f1]/90 dark:bg-[#0c0b0a]/90 backdrop-blur-xl lg:block transition-all duration-300">
+    <header className="sticky top-0 z-30 hidden border-b border-stone-100 bg-[#fbf7f1] dark:border-stone-850/80 dark:bg-[#0c0b0a] lg:block">
       <div className="page-shell flex h-20 items-center justify-between">
         <div className="flex items-center gap-4">
           <button
@@ -65,10 +68,23 @@ export function DesktopHeader({ onMenu }) {
           <button
             type="button"
             onClick={openCartDrawer}
-            className="grid h-11 w-11 place-items-center rounded-full bg-white dark:bg-stone-850 text-stone-600 dark:text-white shadow-sm border border-stone-100 dark:border-stone-800 active:scale-95 transition"
+            className="relative grid h-11 w-11 place-items-center rounded-full bg-white dark:bg-stone-850 text-stone-600 dark:text-white shadow-sm border border-stone-100 dark:border-stone-800 active:scale-95 transition"
             aria-label="Cart"
           >
-            <ShoppingBag size={19} />
+            <motion.span
+              key={cartBump}
+              initial={{ scale: 1 }}
+              animate={{ scale: [1, 1.15, 1] }}
+              transition={{ duration: 0.35 }}
+              className="inline-flex"
+            >
+              <ShoppingBag size={19} />
+            </motion.span>
+            {cartCount > 0 ? (
+              <span className="absolute -right-0.5 -top-0.5 grid h-4 min-w-4 place-items-center rounded-full bg-turmeric px-1 text-[9px] font-black text-white">
+                {cartCount > 9 ? '9+' : cartCount}
+              </span>
+            ) : null}
           </button>
           {isAuthenticated ? (
             <Link to="/profile" className="flex items-center gap-2 rounded-full bg-white dark:bg-stone-850 border border-stone-100 dark:border-stone-800 py-1 pl-1 pr-4 shadow-sm active:scale-98 transition">

@@ -34,7 +34,7 @@ export function Signup() {
   return (
     <AuthCard
       eyebrow="Create account"
-      title="Start your ritual"
+      title="Create your account"
       subtitle="Create a local demo profile and unlock cart, orders, wishlist, and account preferences."
       footer={
         <p className="text-center text-sm text-stone-600">

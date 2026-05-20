@@ -60,7 +60,9 @@ export function CartDrawer() {
                       key={item.productId}
                       className="flex gap-3 rounded-brand border border-stone-100 bg-white p-3 dark:border-stone-800 dark:bg-stone-850"
                     >
-                      <img src={item.product.image} alt={item.product.name} className="h-20 w-16 shrink-0 rounded-xl object-cover" />
+                      <div className="aspect-[4/5] h-20 w-16 shrink-0 overflow-hidden rounded-xl bg-[#f6efe5]">
+                        <img src={item.product.image} alt={item.product.name} className="h-full w-full object-cover" />
+                      </div>
                       <div className="min-w-0 flex-1">
                         <p className="truncate text-sm font-extrabold text-ink dark:text-white">{item.product.name}</p>
                         <p className="mt-0.5 text-xs font-semibold text-stone-500">{item.product.size} | {formatCurrency(item.product.price)}</p>

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
   BadgeCheck,
@@ -28,18 +28,21 @@ const trustBadges = [
 ]
 
 const reviews = [
-  ['Aarohi M.', 'The texture feels expensive and absorbs fast. My skin looks brighter after two weeks.'],
-  ['Riya S.', 'Packaging, scent, and finish are all very premium. This feels like a real upgrade.'],
-  ['Naina K.', 'Loved the lightweight feel. No stickiness and it layers beautifully.'],
+  ['Aarohi M.', 'Gentle cleanse, no tight feeling after wash. Good for daily use in humid weather.'],
+  ['Riya S.', 'Nice mild fragrance and easy pump-friendly size for the bathroom shelf.'],
+  ['Naina K.', 'Light foam, rinses off quickly, and skin feels fresh not dry.'],
 ]
 
 export function ProductDetails() {
   const { productId } = useParams()
+  const navigate = useNavigate()
   const product = products.find((item) => item.id === productId) ?? products[0]
   const [activeImage, setActiveImage] = useState(0)
   const [previewOpen, setPreviewOpen] = useState(false)
   const [openAccordion, setOpenAccordion] = useState('Ingredients')
+  const [quantity, setQuantity] = useState(1)
   const addToCart = useAppStore((state) => state.addToCart)
+  const updateCartQuantity = useAppStore((state) => state.updateCartQuantity)
   const openCartDrawer = useAppStore((state) => state.openCartDrawer)
   const toggleWishlist = useAppStore((state) => state.toggleWishlist)
   const wishlist = useAppStore((state) => state.wishlist)
@@ -60,12 +63,17 @@ export function ProductDetails() {
 
   const add = () => {
     addToCart(product.id)
-    openCartDrawer()
+    if (quantity > 1) {
+      updateCartQuantity(product.id, quantity)
+    }
     showToast('Added to cart')
   }
 
   const buyNow = () => {
     addToCart(product.id)
+    if (quantity > 1) {
+      updateCartQuantity(product.id, quantity)
+    }
     showToast('Ready for checkout')
     openCartDrawer()
   }
@@ -144,11 +152,75 @@ export function ProductDetails() {
             <span className="text-sm font-bold text-stone-500">{product.reviews} reviews</span>
             <span className="rounded-full bg-mist px-3 py-1 text-xs font-extrabold uppercase text-moss">{product.tag}</span>
           </div>
+
+          {/* Simple fragrance label if the item belongs to the Body Wash category */}
+          {product.category === 'Body Wash' && (
+            <div className="mt-3 flex items-center gap-2">
+              <span className="text-[11px] font-extrabold uppercase tracking-wider text-stone-500">Fragrance:</span>
+              <span className="text-xs font-bold text-moss bg-[#eaf1e8] dark:bg-moss/20 px-2.5 py-1 rounded-full">{product.tag}</span>
+            </div>
+          )}
+
           <p className="mt-5 text-sm leading-6 text-stone-600">{product.description}</p>
+          
           <div className="mt-5 flex items-baseline gap-3">
             <span className="text-3xl font-black">{formatCurrency(product.price)}</span>
             <span className="text-stone-400 line-through">{formatCurrency(product.compareAt)}</span>
             <span className="rounded-full bg-rose/30 px-3 py-1 text-xs font-extrabold text-clay">{discount}% off</span>
+          </div>
+
+          {/* SIZE VARIANT SELECTOR */}
+          {product.sizes && product.sizes.length > 1 && (
+            <div className="mt-6">
+              <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-clay">Select Size</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {product.sizes.map((sz) => {
+                  const isSelected = product.size === sz
+                  return (
+                    <button
+                      key={sz}
+                      onClick={() => {
+                        if (product.sizeIds && product.sizeIds[sz]) {
+                          navigate(`/product/${product.sizeIds[sz]}`)
+                        }
+                      }}
+                      className={cx(
+                        'h-10 rounded-xl px-4 text-xs font-extrabold transition border',
+                        isSelected
+                          ? 'bg-moss text-white border-moss shadow-sm'
+                          : 'bg-white border-stone-200 text-stone-600 hover:bg-cream/40 dark:bg-stone-900 dark:text-stone-300 dark:border-stone-850'
+                      )}
+                    >
+                      {sz}
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* QUANTITY SELECTOR */}
+          <div className="mt-6 flex items-center gap-4">
+            <span className="text-xs font-extrabold uppercase tracking-[0.18em] text-clay">Quantity</span>
+            <div className="flex items-center rounded-xl border border-stone-200 bg-white dark:bg-stone-900 dark:border-stone-800">
+              <button
+                type="button"
+                onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                className="flex h-9 w-9 items-center justify-center font-extrabold text-stone-500 hover:text-ink dark:hover:text-white"
+              >
+                -
+              </button>
+              <span className="w-8 text-center text-xs font-black text-ink dark:text-white">
+                {quantity}
+              </span>
+              <button
+                type="button"
+                onClick={() => setQuantity((q) => q + 1)}
+                className="flex h-9 w-9 items-center justify-center font-extrabold text-stone-500 hover:text-ink dark:hover:text-white"
+              >
+                +
+              </button>
+            </div>
           </div>
 
           <InfoBlock title="Ingredient highlights" items={product.ingredients} />

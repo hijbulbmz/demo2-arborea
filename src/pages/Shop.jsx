@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Filter, Search, X } from 'lucide-react'
 import { ProductCard } from '../components/commerce/ProductCard'
@@ -15,8 +16,16 @@ const sortOptions = [
 ]
 
 export function Shop() {
+  const [searchParams] = useSearchParams()
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('All')
+
+  useEffect(() => {
+    const fromUrl = searchParams.get('category')
+    if (fromUrl && ['Face Wash', 'Body Wash', 'All'].includes(fromUrl)) {
+      setCategory(fromUrl)
+    }
+  }, [searchParams])
   const [price, setPrice] = useState('all')
   const [rating, setRating] = useState(0)
   const [badge, setBadge] = useState('all')
@@ -52,7 +61,7 @@ export function Shop() {
 
   return (
     <div className="space-y-6">
-      <SectionHeader eyebrow="Face wash, body wash and combos" title="Shop Arborea" />
+      <SectionHeader eyebrow="Face wash & body wash" title="Shop Arborea" />
 
       <div className="sticky top-[4.25rem] z-20 rounded-brand border border-stone-100 bg-white p-3 lg:top-24">
         <div className="grid gap-3 lg:grid-cols-[1fr_auto_auto]">

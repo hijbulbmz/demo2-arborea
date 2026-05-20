@@ -4,7 +4,6 @@ import {
   ClipboardList,
   Heart,
   Home,
-  LayoutDashboard,
   Package,
   Settings,
   ShoppingBag,

@@ -8,18 +8,16 @@ const premiumDefaultUser = {
   gender: 'Female',
   birthday: '1998-05-24',
   avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
-  points: 1850,
+  points: 240,
   skinType: 'Combination Sensitive',
   hairType: 'Fine Wavy',
-  interests: ['Anti-Aging', 'Hydration', 'Sun Protection', 'Skin Brightening'],
-  favorites: ['Sunscreen SPF 50', 'Vitamin C Hydrating Serum'],
 }
 
 const defaultNotifications = [
-  { id: 'notif-1', title: 'Order Dispatched 🚚', description: 'Your order ARB-76467 for Vitamin C Serum has been shipped via BlueDart.', time: '2 mins ago', type: 'order', read: false },
-  { id: 'notif-2', title: 'Combo Offer Live', description: 'Save more on Aloe Vera and Lemon summer care combos this week.', time: '1 hour ago', type: 'offer', read: false },
-  { id: 'notif-3', title: 'Wishlist Restock Alert 🛍️', description: 'The Silk Sunscreen SPF 50 is back in stock. Grab yours while it lasts!', time: 'Yesterday', type: 'wishlist', read: true },
-  { id: 'notif-4', title: 'Evening Routine Checklist 🧖‍♀️', description: 'Time for your dual hydration ritual. Click to see customized tips.', time: '2 days ago', type: 'recommendation', read: true }
+  { id: 'notif-1', title: 'Order dispatched', description: 'Your order ARB-76467 with Neem Face Wash is on the way.', time: '2 mins ago', type: 'order', read: false },
+  { id: 'notif-2', title: 'Buy 2 Get 1 offer', description: 'Save on selected face washes this week.', time: '1 hour ago', type: 'offer', read: false },
+  { id: 'notif-3', title: 'Wishlist restock', description: 'Charcoal Face Wash is back in stock.', time: 'Yesterday', type: 'wishlist', read: true },
+  { id: 'notif-4', title: 'Care tip', description: 'Use aloe body wash after sun exposure for a cooling rinse.', time: '2 days ago', type: 'recommendation', read: true },
 ]
 
 const defaultTickets = [
@@ -36,7 +34,7 @@ const defaultTickets = [
   },
   {
     id: 'TCK-8721',
-    subject: 'Aloe Vera Gel formulation check',
+    subject: 'Aloe Body Wash ingredient query',
     category: 'Product Info',
     status: 'Resolved',
     date: '2026-05-12',

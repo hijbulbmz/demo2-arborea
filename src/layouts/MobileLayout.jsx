@@ -10,7 +10,7 @@ export function MobileLayout() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-cream dark:bg-stone-950 transition-colors duration-300 lg:hidden">
       <MobileTopBar onMenu={drawer.open} />
-      <main className="px-4 pb-[calc(5rem+env(safe-area-inset-bottom))] pt-5">
+      <main className="px-4 pb-[calc(5.25rem+env(safe-area-inset-bottom))] pt-4">
         <AnimatedOutlet />
       </main>
       <BottomNav />

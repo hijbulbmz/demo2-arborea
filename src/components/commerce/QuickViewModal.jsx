@@ -17,8 +17,7 @@ export function QuickViewModal() {
 
   const handleAdd = () => {
     addToCart(product.id)
-    closeQuickView()
-    showToast(`${product.name} added to cart`)
+    showToast('Added to cart')
   }
 
   const handleWishlist = () => {
@@ -40,9 +39,9 @@ export function QuickViewModal() {
             onClick={closeQuickView}
           />
           <motion.section
-            initial={{ opacity: 0, scale: 0.93, y: 60 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.93, y: 60 }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 24 }}
             transition={{ type: 'tween', duration: 0.2, ease: 'easeOut' }}
             className="fixed inset-x-0 bottom-0 z-[80] max-h-[92dvh] overflow-y-auto rounded-t-[1.5rem] border border-white/40 bg-[#fbf7f1] p-5 shadow-xl dark:border-stone-800 dark:bg-stone-900 sm:left-4 sm:right-4 sm:mx-auto sm:max-w-sm lg:left-1/2 lg:top-1/2 lg:bottom-auto lg:max-h-[720px] lg:w-[760px] lg:max-w-none lg:-translate-x-1/2 lg:-translate-y-1/2 lg:rounded-[2rem] lg:p-6"
             style={{

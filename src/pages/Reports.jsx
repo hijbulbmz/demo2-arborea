@@ -15,6 +15,7 @@ import {
 } from 'lucide-react'
 import { useAuthStore } from '../store/useAuthStore'
 import { Card } from '../components/ui/Card'
+import { featureFlags } from '../constants/featureFlags'
 import { formatCurrency } from '../utils/formatters'
 import { SEO } from '../components/ui/SEO'
 
@@ -29,17 +30,15 @@ const monthlySpendingData = [
 ]
 
 const categoryData = [
-  { category: 'Serums & Oils', count: 4, spent: 4890, percent: 55, color: 'bg-clay text-clay' },
-  { category: 'Sun Protection', count: 2, spent: 1980, percent: 23, color: 'bg-moss text-moss' },
-  { category: 'Cleansers', count: 2, spent: 1100, percent: 12, color: 'bg-indigo-600 text-indigo-600' },
-  { category: 'Moisturizers', count: 1, spent: 900, percent: 10, color: 'bg-amber-600 text-amber-600' },
+  { category: 'Face Wash', count: 5, spent: 2890, percent: 55, color: 'bg-clay text-clay' },
+  { category: 'Body Wash', count: 3, spent: 1980, percent: 45, color: 'bg-moss text-moss' },
 ]
 
 const recentActivities = [
-  { id: 1, type: 'purchase', text: 'Purchased "Sunscreen SPF 50" & "Vitamin C Serum"', time: '2 hours ago', icon: '🛍️' },
+  { id: 1, type: 'purchase', text: 'Purchased "Neem Face Wash" & "Sandal Body Wash"', time: '2 hours ago', icon: '🛍️' },
   { id: 2, type: 'coupon', text: 'Applied coupon code "GLOW15" for ₹210 savings', time: 'Yesterday', icon: '🏷️' },
-  { id: 3, type: 'wishlist', text: 'Added "Nourishing Night Cream" to wishlist', time: '3 days ago', icon: '💖' },
-  { id: 4, type: 'points', text: 'Rewarded 150 points for summer restock purchase', time: '4 days ago', icon: '✨' },
+  { id: 3, type: 'wishlist', text: 'Added "Charcoal Face Wash" to wishlist', time: '3 days ago', icon: '💖' },
+  { id: 4, type: 'points', text: 'Rewarded ₹150 for summer restock purchase', time: '4 days ago', icon: '✨' },
 ]
 
 // Corporate D2C Brand Mock Data
@@ -53,22 +52,24 @@ const corporateRevenueData = [
 ]
 
 const corporateProducts = [
-  { name: "Vitamin C Brightening Serum", category: "Skincare", units: "4,240 sold", revenue: 3387760, color: "bg-clay" },
-  { name: "Vanilla Amber Luxury Oud", category: "Perfumes", units: "3,180 sold", revenue: 4130820, color: "bg-moss" },
-  { name: "Rosemary Bhringraj Hair Oil", category: "Haircare", units: "2,490 sold", revenue: 1491510, color: "bg-amber-600" },
-  { name: "Satin Finish Sunscreen SPF 50", category: "Skincare", units: "2,110 sold", revenue: 1474890, color: "bg-emerald-600" }
+  { name: "Mysore Sandal Body Wash", category: "Body Wash", units: "4,240 sold", revenue: 3387760, color: "bg-clay" },
+  { name: "Neem & Tea Tree Face Wash", category: "Face Wash", units: "3,180 sold", revenue: 4130820, color: "bg-moss" },
+  { name: "Gentle Aloe Body Wash", category: "Body Wash", units: "2,490 sold", revenue: 1491510, color: "bg-amber-600" },
+  { name: "Lemon Body Wash", category: "Body Wash", units: "2,110 sold", revenue: 1474890, color: "bg-emerald-600" }
 ]
 
 const liveAdminFeed = [
   { id: 1, text: "New Order #ARB-9821 completed by Aarohi M. from Mumbai", time: "Just now", amount: 2847 },
-  { id: 2, text: "Aaliyah K. redeemed reward balance points", time: "5 mins ago", amount: null },
+  { id: 2, text: "Aaliyah K. redeemed ₹240 reward balance", time: "5 mins ago", amount: null },
   { id: 3, text: "Bestseller restock trigger fired for Neem Face Wash", time: "2 hours ago", amount: null },
   { id: 4, text: "Support Ticket #TKT-821 marked resolved by Concierge team", time: "4 hours ago", amount: null }
 ]
 
 export function Reports() {
   const { user } = useAuthStore()
-  const [dashboardMode, setDashboardMode] = useState('customer') // 'customer' | 'admin'
+  const [dashboardMode, setDashboardMode] = useState(
+    featureFlags.customerReportsDashboard ? 'customer' : 'admin',
+  )
   const [activeChartPoint, setActiveChartPoint] = useState(null)
 
   // Chart setup
@@ -94,43 +95,44 @@ export function Reports() {
       exit={{ opacity: 0, y: -12 }}
       className="space-y-6 pb-20 select-none"
     >
-      <SEO 
-        title={dashboardMode === 'customer' ? "Regimen Insights" : "D2C Sales Portal"} 
-        description="Luxury D2C metrics, interactive routine insights, and real-time revenue performance charts for the Arborea ecosystem."
+      <SEO
+        title="Admin Analytics"
+        description="Sales and catalog performance for the Arborea admin team."
       />
 
-      {/* DASHBOARD MODE TOGGLE */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-stone-100 dark:border-stone-850 pb-4">
+      <div className="flex flex-col gap-4 border-b border-stone-100 pb-4 dark:border-stone-850 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-clay">Corporate Portal</p>
-          <h1 className="mt-1 font-display text-3xl sm:text-4xl font-bold text-ink dark:text-white">
-            {dashboardMode === 'customer' ? "Routine Insights" : "Executive D2C Hub"}
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-clay">Admin only</p>
+          <h1 className="mt-1 font-display text-3xl font-bold text-ink dark:text-white sm:text-4xl">
+            {dashboardMode === 'customer' ? 'Shopping summary' : 'Store analytics'}
           </h1>
         </div>
-        <div className="flex rounded-full bg-cream dark:bg-stone-850 p-1 shadow-inner border border-white/60 dark:border-stone-800">
-          <button
-            onClick={() => setDashboardMode('customer')}
-            className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-extrabold uppercase tracking-wider transition ${
-              dashboardMode === 'customer' 
-                ? 'bg-ink text-white shadow-soft' 
-                : 'text-stone-500 hover:text-ink dark:hover:text-white'
-            }`}
-          >
-            <Layers size={13} />
-            My Regimen
-          </button>
-          <button
-            onClick={() => setDashboardMode('admin')}
-            className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-extrabold uppercase tracking-wider transition ${
-              dashboardMode === 'admin' 
-                ? 'bg-ink text-white shadow-soft' 
-                : 'text-stone-500 hover:text-ink dark:hover:text-white'
-            }`}
-          >
-            <BarChart3 size={13} />
-            D2C Corporate
-          </button>
-        </div>
+        {featureFlags.customerReportsDashboard ? (
+          <div className="flex rounded-full bg-cream p-1 shadow-inner ring-1 ring-stone-100 dark:bg-stone-850 dark:ring-stone-800">
+            <button
+              onClick={() => setDashboardMode('customer')}
+              className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-extrabold uppercase tracking-wider transition ${
+                dashboardMode === 'customer'
+                  ? 'bg-ink text-white'
+                  : 'text-stone-500 hover:text-ink dark:hover:text-white'
+              }`}
+            >
+              <Layers size={13} />
+              My orders
+            </button>
+            <button
+              onClick={() => setDashboardMode('admin')}
+              className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-extrabold uppercase tracking-wider transition ${
+                dashboardMode === 'admin'
+                  ? 'bg-ink text-white'
+                  : 'text-stone-500 hover:text-ink dark:hover:text-white'
+              }`}
+            >
+              <BarChart3 size={13} />
+              Admin
+            </button>
+          </div>
+        ) : null}
       </div>
 
       <AnimatePresence mode="wait">
@@ -201,7 +203,7 @@ export function Reports() {
                   <div>
                     <p className="text-xs font-bold text-stone-500 uppercase tracking-wider">Wishlist Routine</p>
                     <h3 className="mt-2 font-display text-3xl font-black text-ink dark:text-white">
-                      {user?.favorites?.length + 3} Products
+                      8 Products
                     </h3>
                   </div>
                   <div className="rounded-xl bg-rose-50 text-rose-600 dark:bg-rose-950/20 p-2">

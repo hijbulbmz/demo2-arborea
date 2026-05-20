@@ -18,7 +18,7 @@ export function Welcome() {
           Personal care that feels close to home.
         </h1>
         <p className="mt-5 max-w-xl text-base leading-7 text-stone-600">
-          Browse daily face wash, body wash, and combo routines with clear offers, trusted ingredients, and smooth mobile checkout.
+          Browse daily face wash and body wash with clear offers, trusted ingredients, and smooth mobile checkout.
         </p>
         <div className="mt-8 grid gap-3 sm:max-w-sm">
           <Link

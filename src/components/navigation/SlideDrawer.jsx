@@ -40,7 +40,7 @@ export function SlideDrawer({ open, onClose }) {
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
             transition={{ type: 'tween', duration: 0.22, ease: 'easeOut' }}
-            className="fixed left-0 top-0 z-50 flex h-screen max-h-[100dvh] w-[84vw] max-w-[340px] flex-col overflow-hidden bg-pearl shadow-xl"
+            className="fixed left-0 top-0 z-50 flex h-screen max-h-[100dvh] w-[270px] shrink-0 flex-col overflow-hidden bg-pearl shadow-xl"
           >
             <div className="shrink-0 border-b border-stone-100 px-5 pb-4 pt-5">
               <div className="flex items-center justify-between">
@@ -64,7 +64,7 @@ export function SlideDrawer({ open, onClose }) {
                 <img src={user.avatar} alt={user.name} className="h-12 w-12 rounded-full object-cover" />
                 <div>
                   <p className="font-bold text-ink">{user.name}</p>
-                  <p className="text-sm font-bold text-clay">Reward Balance: {user.points} pts</p>
+                  <p className="text-sm font-bold text-clay">Reward Balance: ₹{user.points}</p>
                 </div>
               </div>
             ) : (
