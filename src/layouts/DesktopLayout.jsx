@@ -11,6 +11,7 @@ import {
 import { useAuthStore } from '../store/useAuthStore'
 import { AnimatedOutlet } from '../components/navigation/AnimatedOutlet'
 import { DesktopHeader } from '../components/navigation/DesktopHeader'
+import { LayoutFooter } from '../components/navigation/LayoutFooter'
 import { SlideDrawer } from '../components/navigation/SlideDrawer'
 import { useDisclosure } from '../hooks/useDisclosure'
 
@@ -29,6 +30,7 @@ export function DesktopLayout() {
   ]
 
   const isAccountRoute = accountRoutes.includes(pathname)
+  const isHome = pathname === '/'
 
   const sidebarLinks = [
     { label: 'My Profile', path: '/profile', icon: User },
@@ -42,7 +44,9 @@ export function DesktopLayout() {
   return (
     <div className="hidden min-h-screen bg-cream dark:bg-stone-950 transition-colors duration-300 lg:block">
       <DesktopHeader onMenu={drawer.open} />
-      <main className="page-shell mx-auto max-w-7xl px-4 py-8 pb-[calc(6.5rem+env(safe-area-inset-bottom))]">
+      <main
+        className={`page-shell mx-auto max-w-7xl px-4 pb-[calc(6.5rem+env(safe-area-inset-bottom))] ${isHome ? 'pt-4' : 'py-8'}`}
+      >
         {isAccountRoute ? (
           <div className="grid grid-cols-[280px_1fr] gap-8 items-start">
             <aside className="sticky top-[8.75rem] w-[280px] rounded-brand border border-stone-100 bg-white p-5 shadow-soft dark:border-stone-800 dark:bg-stone-900/80">
@@ -94,6 +98,7 @@ export function DesktopLayout() {
         ) : (
           <AnimatedOutlet />
         )}
+        <LayoutFooter />
       </main>
       <SlideDrawer open={drawer.isOpen} onClose={drawer.close} />
     </div>
