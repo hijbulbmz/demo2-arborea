@@ -111,10 +111,10 @@ export function Shop() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-80px' }}
-              className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3"
+              className="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-5"
             >
               {filtered.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product.id} product={product} compact />
               ))}
             </motion.div>
           ) : (
