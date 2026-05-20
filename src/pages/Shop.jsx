@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Filter, Search, X } from 'lucide-react'
+import { Filter, X } from 'lucide-react'
 import { ProductCard } from '../components/commerce/ProductCard'
 import { SectionHeader } from '../components/commerce/SectionHeader'
 import { EmptyState } from '../components/commerce/EmptyState'
@@ -66,28 +66,19 @@ export function Shop() {
       <SectionHeader title="Shop" />
 
       <div className="sticky top-[7.5rem] z-20 rounded-brand border border-stone-100 bg-white p-3 lg:top-[8.75rem]">
-        <div className="grid gap-3 lg:grid-cols-[1fr_auto_auto]">
-          <label className="flex h-12 items-center gap-2 rounded-2xl bg-cream px-4">
-            <Search size={18} className="text-stone-400" />
-            <input
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search neem, aloe, lemon..."
-              className="min-w-0 flex-1 bg-transparent text-sm font-semibold outline-none"
-            />
-          </label>
+        <div className="grid grid-cols-2 gap-2 lg:flex lg:justify-end">
           <button
             type="button"
             onClick={() => setFiltersOpen(true)}
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-moss px-4 text-sm font-extrabold text-white lg:hidden"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-moss px-3 text-sm font-extrabold text-white lg:hidden"
           >
-            <Filter size={18} />
+            <Filter size={17} />
             Filters
           </button>
           <select
             value={sort}
             onChange={(event) => setSort(event.target.value)}
-            className="h-12 rounded-2xl border border-stone-200 bg-white px-4 text-sm font-bold text-ink outline-none"
+            className="h-11 min-w-0 rounded-2xl border border-stone-200 bg-white px-3 text-sm font-bold text-ink outline-none lg:h-11 lg:min-w-[11rem] lg:px-4"
           >
             {sortOptions.map(([value, label]) => (
               <option key={value} value={value}>{label}</option>
