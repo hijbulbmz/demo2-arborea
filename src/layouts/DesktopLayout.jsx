@@ -45,7 +45,7 @@ export function DesktopLayout() {
       <main className="page-shell py-8 px-4 max-w-7xl mx-auto">
         {isAccountRoute ? (
           <div className="grid grid-cols-[280px_1fr] gap-8 items-start">
-            <aside className="sticky top-24 w-[280px] rounded-brand border border-stone-100 bg-white p-5 shadow-soft dark:border-stone-800 dark:bg-stone-900/80">
+            <aside className="sticky top-[8.75rem] w-[280px] rounded-brand border border-stone-100 bg-white p-5 shadow-soft dark:border-stone-800 dark:bg-stone-900/80">
               <div className="flex items-center gap-3 border-b border-stone-100 pb-4 dark:border-stone-800">
                 <img
                   src={user?.avatar}

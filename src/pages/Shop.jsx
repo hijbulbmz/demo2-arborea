@@ -25,6 +25,8 @@ export function Shop() {
     if (fromUrl && ['Face Wash', 'Body Wash', 'All'].includes(fromUrl)) {
       setCategory(fromUrl)
     }
+    const q = searchParams.get('q')
+    if (q !== null) setQuery(q)
   }, [searchParams])
   const [price, setPrice] = useState('all')
   const [rating, setRating] = useState(0)
@@ -63,7 +65,7 @@ export function Shop() {
     <div className="space-y-6">
       <SectionHeader eyebrow="Face wash & body wash" title="Shop Arborea" />
 
-      <div className="sticky top-[4.25rem] z-20 rounded-brand border border-stone-100 bg-white p-3 lg:top-24">
+      <div className="sticky top-[7.5rem] z-20 rounded-brand border border-stone-100 bg-white p-3 lg:top-[8.75rem]">
         <div className="grid gap-3 lg:grid-cols-[1fr_auto_auto]">
           <label className="flex h-12 items-center gap-2 rounded-2xl bg-cream px-4">
             <Search size={18} className="text-stone-400" />

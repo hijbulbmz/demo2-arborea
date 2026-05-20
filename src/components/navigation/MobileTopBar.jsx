@@ -1,12 +1,14 @@
-import { Menu, Search, User } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Heart, Menu, User } from 'lucide-react'
+import { Link, NavLink } from 'react-router-dom'
 import { useAuthStore } from '../../store/useAuthStore'
 import { useAppStore } from '../../store/useAppStore'
+import { HeaderSearchBar } from './HeaderSearchBar'
 
 export function MobileTopBar({ onMenu }) {
   const user = useAuthStore((state) => state.user)
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
-  const openSearch = useAppStore((state) => state.openSearch)
+  const wishlist = useAppStore((state) => state.wishlist)
+  const wishlistCount = wishlist.length
 
   return (
     <header className="sticky top-0 z-30 border-b border-stone-200 bg-cream/95 lg:hidden">
@@ -23,14 +25,26 @@ export function MobileTopBar({ onMenu }) {
           Arborea
         </Link>
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={openSearch}
-            className="grid h-10 w-10 place-items-center rounded-full bg-white ring-1 ring-stone-100"
-            aria-label="Search"
+          <NavLink
+            to="/wishlist"
+            className="relative grid h-10 w-10 place-items-center rounded-full bg-white ring-1 ring-stone-100"
+            aria-label="Wishlist"
           >
-            <Search size={18} />
-          </button>
+            {({ isActive }) => (
+              <>
+                <Heart
+                  size={18}
+                  className={isActive ? 'fill-rose/30 text-clay' : 'text-stone-600'}
+                  strokeWidth={2.2}
+                />
+                {wishlistCount > 0 ? (
+                  <span className="absolute -right-0.5 -top-0.5 grid h-4 min-w-4 place-items-center rounded-full bg-turmeric px-1 text-[9px] font-black text-white">
+                    {wishlistCount > 9 ? '9+' : wishlistCount}
+                  </span>
+                ) : null}
+              </>
+            )}
+          </NavLink>
           {isAuthenticated ? (
             <Link to="/profile" className="block h-10 w-10 overflow-hidden rounded-full bg-white ring-1 ring-stone-100" aria-label="Profile">
               <img src={user.avatar} alt={user.name} className="h-full w-full object-cover" />
@@ -46,6 +60,9 @@ export function MobileTopBar({ onMenu }) {
             </Link>
           )}
         </div>
+      </div>
+      <div className="border-t border-stone-100 px-4 pb-3 pt-2">
+        <HeaderSearchBar />
       </div>
     </header>
   )
