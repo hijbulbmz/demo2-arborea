@@ -8,7 +8,7 @@ import { cx, formatCurrency } from '../../utils/formatters'
 import { Button } from '../ui/Button'
 import { Card } from '../ui/Card'
 
-export function ProductCard({ product }) {
+export function ProductCard({ product, compact = false }) {
   const wishlist = useAppStore((state) => state.wishlist)
   const toggleWishlist = useAppStore((state) => state.toggleWishlist)
   const addToCart = useAppStore((state) => state.addToCart)
@@ -44,11 +44,8 @@ export function ProductCard({ product }) {
               loading="lazy"
             />
           </Link>
-          <div className="absolute left-2.5 top-2.5 flex max-w-[calc(100%-1.25rem)] flex-wrap gap-1.5">
-            <span className="rounded-full bg-white/95 px-2 py-1 text-[9px] font-extrabold uppercase tracking-wide text-clay dark:bg-stone-900/90">
-              {product.tag}
-            </span>
-            <span className="rounded-full bg-turmeric px-2 py-1 text-[9px] font-extrabold uppercase tracking-wide text-white">
+          <div className="absolute left-2 top-2 flex gap-1">
+            <span className="rounded-full bg-turmeric px-2 py-0.5 text-[9px] font-extrabold text-white">
               {discount}% off
             </span>
           </div>
@@ -61,32 +58,32 @@ export function ProductCard({ product }) {
             <Eye size={17} />
           </button>
         </div>
-        <div className="space-y-3 p-3.5 sm:p-4">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-moss dark:text-cream">{product.category}</p>
-            <Link to={`/product/${product.id}`} className="mt-1 block min-h-[2.5rem] text-[15px] font-extrabold leading-5 text-ink transition-colors hover:text-clay dark:text-white dark:hover:text-cream sm:text-base">
-              {product.name}
-            </Link>
-          </div>
+        <div className={cx('space-y-2.5', compact ? 'p-3' : 'space-y-3 p-3.5 sm:p-4')}>
           <div className="flex items-start justify-between gap-2">
-            <div>
-              <div className="flex flex-wrap items-baseline gap-2">
-                <span className="text-lg font-black text-ink dark:text-white">{formatCurrency(product.price)}</span>
-                <span className="text-xs text-stone-400 line-through">
-                  {formatCurrency(product.compareAt)}
+            <div className="min-w-0">
+              <Link
+                to={`/product/${product.id}`}
+                className={cx(
+                  'block font-extrabold leading-snug text-ink transition-colors hover:text-clay dark:text-white',
+                  compact ? 'text-sm' : 'min-h-[2.25rem] text-[15px] sm:text-base',
+                )}
+              >
+                {product.name}
+                {product.size ? <span className="font-bold text-stone-500"> · {product.size}</span> : null}
+              </Link>
+              <div className="mt-1.5 flex flex-wrap items-baseline gap-1.5">
+                <span className={cx('font-black text-ink dark:text-white', compact ? 'text-base' : 'text-lg')}>
+                  {formatCurrency(product.price)}
+                </span>
+                <span className="text-xs text-stone-400 line-through">{formatCurrency(product.compareAt)}</span>
+                <span className="flex items-center gap-0.5 text-[11px] font-semibold text-stone-500">
+                  <Star size={11} className="fill-amber-400 text-amber-400" />
+                  {product.rating}
                 </span>
               </div>
-              <div className="mt-1 flex flex-col gap-1">
-                <div className="flex items-center gap-1 text-xs font-semibold text-stone-500">
-                  <Star size={13} className="fill-amber-400 text-amber-400" />
-                  {product.rating} ({product.reviews})
-                </div>
-                {product.stock && product.stock <= 5 && (
-                  <span className="mt-0.5 text-[10px] font-black uppercase tracking-wide text-amber-700 dark:text-amber-400">
-                    Only {product.stock} left
-                  </span>
-                )}
-              </div>
+              {!compact && product.stock && product.stock <= 5 ? (
+                <span className="mt-1 text-[10px] font-bold text-amber-700">{product.stock} left</span>
+              ) : null}
             </div>
             <button
               type="button"
@@ -103,11 +100,14 @@ export function ProductCard({ product }) {
             </button>
           </div>
           <Button
-            className="relative h-11 w-full overflow-hidden text-xs font-bold uppercase tracking-wide transition-transform duration-150 active:scale-98"
+            className={cx(
+              'relative w-full overflow-hidden text-xs font-bold transition-transform duration-150 active:scale-98',
+              compact ? 'h-10' : 'h-11 uppercase tracking-wide',
+            )}
             icon={Plus}
             onClick={handleCart}
           >
-            Add to Cart
+            {compact ? 'Add' : 'Add to cart'}
           </Button>
         </div>
       </Card>

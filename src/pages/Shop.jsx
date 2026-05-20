@@ -63,7 +63,7 @@ export function Shop() {
 
   return (
     <div className="space-y-6">
-      <SectionHeader eyebrow="Face wash & body wash" title="Shop Arborea" />
+      <SectionHeader title="Shop" />
 
       <div className="sticky top-[7.5rem] z-20 rounded-brand border border-stone-100 bg-white p-3 lg:top-[8.75rem]">
         <div className="grid gap-3 lg:grid-cols-[1fr_auto_auto]">
@@ -112,10 +112,7 @@ export function Shop() {
 
         <section>
           <div className="mb-5 flex items-center justify-between gap-3">
-            <p className="text-sm font-bold text-stone-500">{filtered.length} products found</p>
-            <span className="shrink-0 rounded-full bg-mist px-3 py-1 text-xs font-extrabold text-moss">
-              Fast delivery available
-            </span>
+            <p className="text-sm font-bold text-stone-500">{filtered.length} items</p>
           </div>
           {filtered.length ? (
             <motion.div
