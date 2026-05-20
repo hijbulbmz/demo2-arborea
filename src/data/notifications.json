@@ -1,0 +1,16 @@
+[
+  {
+    "id": "ntf_001",
+    "title": "Your glow routine is ready",
+    "body": "A curated 3-step kit is waiting with an extra 15% off.",
+    "type": "offer",
+    "read": false
+  },
+  {
+    "id": "ntf_002",
+    "title": "Order ORD-24011 is moving",
+    "body": "Your parcel has left the fulfilment center.",
+    "type": "order",
+    "read": false
+  }
+]

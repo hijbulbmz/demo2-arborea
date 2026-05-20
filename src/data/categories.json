@@ -1,0 +1,20 @@
+[
+  {
+    "id": "face-wash",
+    "name": "Face Wash",
+    "count": 15,
+    "image": "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    "id": "body-wash",
+    "name": "Body Wash",
+    "count": 15,
+    "image": "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    "id": "combo-kits",
+    "name": "Combo Kits",
+    "count": 3,
+    "image": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80"
+  }
+]
