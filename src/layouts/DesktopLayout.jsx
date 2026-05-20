@@ -42,7 +42,7 @@ export function DesktopLayout() {
   return (
     <div className="hidden min-h-screen bg-cream dark:bg-stone-950 transition-colors duration-300 lg:block">
       <DesktopHeader onMenu={drawer.open} />
-      <main className="page-shell py-8 px-4 max-w-7xl mx-auto">
+      <main className="page-shell mx-auto max-w-7xl px-4 py-8 pb-[calc(6.5rem+env(safe-area-inset-bottom))]">
         {isAccountRoute ? (
           <div className="grid grid-cols-[280px_1fr] gap-8 items-start">
             <aside className="sticky top-[8.75rem] w-[280px] rounded-brand border border-stone-100 bg-white p-5 shadow-soft dark:border-stone-800 dark:bg-stone-900/80">

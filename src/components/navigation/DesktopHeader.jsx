@@ -5,7 +5,6 @@ import { useAuthStore } from '../../store/useAuthStore'
 import { useAppStore } from '../../store/useAppStore'
 import { useCartCount } from '../../hooks/useCartCount'
 import { HeaderSearchBar } from './HeaderSearchBar'
-import { primaryNav } from './navItems'
 
 export function DesktopHeader({ onMenu }) {
   const user = useAuthStore((state) => state.user)
@@ -19,51 +18,22 @@ export function DesktopHeader({ onMenu }) {
   return (
     <header className="sticky top-0 z-30 hidden border-b border-stone-100 bg-[#fbf7f1] dark:border-stone-850/80 dark:bg-[#0c0b0a] lg:block">
       <div className="page-shell">
-        <div className="flex h-20 items-center justify-between">
-          <div className="flex items-center gap-4">
+        <div className="flex h-[4.5rem] items-center justify-between gap-6">
+          <div className="flex min-w-0 items-center gap-4">
             <button
               type="button"
               onClick={onMenu}
-              className="grid h-11 w-11 place-items-center rounded-full border border-stone-100 bg-white text-stone-600 shadow-sm transition active:scale-95 dark:border-stone-800 dark:bg-stone-850 dark:text-white"
+              className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-stone-100 bg-white text-stone-600 shadow-sm transition active:scale-95 dark:border-stone-800 dark:bg-stone-850 dark:text-white"
               aria-label="Open menu"
             >
               <Menu size={20} />
             </button>
-            <NavLink to="/" className="font-display text-3xl font-bold tracking-tight text-ink hover:opacity-90 dark:text-white">
+            <NavLink to="/" className="truncate font-display text-3xl font-bold tracking-tight text-ink hover:opacity-90 dark:text-white">
               Arborea
             </NavLink>
           </div>
 
-          <nav className="flex items-center gap-1 rounded-full border border-stone-100 bg-white p-1 shadow-sm dark:border-stone-800/80 dark:bg-stone-900">
-            {primaryNav.map((item) => (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                className="relative rounded-full px-4.5 py-2.5 text-xs font-extrabold uppercase tracking-widest select-none"
-              >
-                {({ isActive }) => (
-                  <>
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeDesktopNav"
-                        className="absolute inset-0 rounded-full bg-moss dark:bg-clay"
-                        transition={{ type: 'spring', stiffness: 350, damping: 28 }}
-                      />
-                    )}
-                    <span
-                      className={`relative z-10 transition-colors duration-250 ${
-                        isActive ? 'text-white' : 'text-stone-500 hover:text-ink dark:text-stone-400 dark:hover:text-white'
-                      }`}
-                    >
-                      {item.label}
-                    </span>
-                  </>
-                )}
-              </NavLink>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2">
             <NavLink
               to="/wishlist"
               className="relative grid h-11 w-11 place-items-center rounded-full border border-stone-100 bg-white text-stone-600 shadow-sm transition active:scale-95 dark:border-stone-800 dark:bg-stone-850 dark:text-white"
@@ -88,7 +58,7 @@ export function DesktopHeader({ onMenu }) {
               type="button"
               onClick={openCartDrawer}
               className="relative grid h-11 w-11 place-items-center rounded-full border border-stone-100 bg-white text-stone-600 shadow-sm transition active:scale-95 dark:border-stone-800 dark:bg-stone-850 dark:text-white"
-              aria-label="Cart"
+              aria-label="Open cart"
             >
               <motion.span
                 key={cartBump}
@@ -116,7 +86,7 @@ export function DesktopHeader({ onMenu }) {
             ) : (
               <Link
                 to="/login"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-moss px-5 text-sm font-bold text-white shadow-soft transition hover:bg-[#29472d] active:scale-95 dark:bg-clay"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-moss px-5 text-sm font-bold text-white shadow-sm transition hover:bg-[#29472d] active:scale-95 dark:bg-clay"
               >
                 <User size={18} strokeWidth={2.2} />
                 Login
@@ -124,7 +94,7 @@ export function DesktopHeader({ onMenu }) {
             )}
           </div>
         </div>
-        <div className="border-t border-stone-100 pb-4 pt-3 dark:border-stone-800">
+        <div className="border-t border-stone-100 pb-3.5 pt-2.5 dark:border-stone-800">
           <HeaderSearchBar className="max-w-2xl" />
         </div>
       </div>

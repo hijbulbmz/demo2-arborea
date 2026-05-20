@@ -24,7 +24,7 @@ export function Cart() {
   }
 
   return (
-    <div className="grid gap-5 pb-[calc(9.5rem+env(safe-area-inset-bottom))] lg:grid-cols-[1fr_380px] lg:items-start lg:pb-0">
+    <div className="grid gap-5 pb-[calc(11rem+env(safe-area-inset-bottom))] lg:grid-cols-[1fr_380px] lg:items-start lg:pb-[calc(6.5rem+env(safe-area-inset-bottom))]">
       <section className="space-y-5">
         <div>
           <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-clay">Secure checkout</p>
@@ -86,7 +86,7 @@ export function Cart() {
           Checkout
         </Link>
       </aside>
-      <div className="fixed inset-x-0 bottom-[calc(4rem+env(safe-area-inset-bottom))] z-30 border-t border-stone-200 bg-[#fbf7f1] px-4 py-3 shadow-[0_-4px_14px_rgba(24,23,22,0.05)] lg:hidden">
+      <div className="fixed inset-x-0 bottom-[calc(6.25rem+env(safe-area-inset-bottom))] z-30 border-t border-stone-200 bg-[#fbf7f1] px-4 py-3 shadow-[0_-4px_14px_rgba(24,23,22,0.05)] lg:hidden">
         <div className="mb-2 flex items-center justify-between text-sm font-bold text-stone-600">
           <span>Total</span>
           <span className="text-xl font-black text-ink">{formatCurrency(total)}</span>

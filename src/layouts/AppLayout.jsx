@@ -1,7 +1,7 @@
 import { DesktopLayout } from './DesktopLayout'
 import { MobileLayout } from './MobileLayout'
+import { BottomNav } from '../components/navigation/BottomNav'
 import { CartDrawer } from '../components/commerce/CartDrawer'
-import { FloatingCartButton } from '../components/commerce/FloatingCartButton'
 import { QuickViewModal } from '../components/commerce/QuickViewModal'
 import { SearchOverlay } from '../components/commerce/SearchOverlay'
 import { ToastViewport } from '../components/ui/ToastViewport'
@@ -11,7 +11,7 @@ export function AppLayout() {
     <div className="relative z-10 min-h-screen">
       <MobileLayout />
       <DesktopLayout />
-      <FloatingCartButton />
+      <BottomNav />
       <SearchOverlay />
       <QuickViewModal />
       <CartDrawer />

@@ -92,7 +92,7 @@ export function ProductDetails() {
   }
 
   return (
-    <div className="pb-24 lg:pb-0">
+    <div className="pb-28">
       <div className="grid gap-6 lg:grid-cols-[1fr_440px] lg:items-start">
         <section className="space-y-4">
           <div className="hide-scrollbar flex snap-x gap-3 overflow-x-auto lg:hidden">
@@ -253,7 +253,7 @@ export function ProductDetails() {
         </div>
       </section>
 
-      <div className="fixed inset-x-0 bottom-[calc(4rem+env(safe-area-inset-bottom))] z-30 grid grid-cols-2 gap-3 border-t border-stone-200 bg-white px-4 py-3 shadow-[0_-4px_14px_rgba(24,23,22,0.05)] lg:hidden">
+      <div className="fixed inset-x-0 bottom-[calc(6.25rem+env(safe-area-inset-bottom))] z-30 grid grid-cols-2 gap-3 border-t border-stone-200 bg-white px-4 py-3 shadow-[0_-4px_14px_rgba(24,23,22,0.05)]">
         <button onClick={add} className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-moss px-5 text-sm font-extrabold text-white shadow-soft">
           <ShoppingBag size={18} />
           Add to Cart

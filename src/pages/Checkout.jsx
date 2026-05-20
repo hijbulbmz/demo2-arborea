@@ -84,7 +84,7 @@ export function Checkout() {
   }
 
   return (
-    <div className="pb-28 lg:pb-0">
+    <div className="pb-32 lg:pb-[calc(6.5rem+env(safe-area-inset-bottom))]">
       <div className="mb-5">
         <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-clay">Secure checkout</p>
         <h1 className="font-display text-4xl font-bold text-ink">Checkout</h1>
@@ -160,7 +160,7 @@ export function Checkout() {
         </aside>
       </div>
 
-      <div className="fixed inset-x-0 bottom-[calc(4rem+env(safe-area-inset-bottom))] z-30 flex items-center justify-between gap-3 border-t border-stone-200 bg-white px-4 py-3 shadow-[0_-4px_14px_rgba(24,23,22,0.05)] lg:hidden">
+      <div className="fixed inset-x-0 bottom-[calc(6.25rem+env(safe-area-inset-bottom))] z-30 flex items-center justify-between gap-3 border-t border-stone-200 bg-white px-4 py-3 shadow-[0_-4px_14px_rgba(24,23,22,0.05)] lg:hidden">
         <div>
           <p className="text-xs font-bold text-stone-500">Total</p>
           <p className="text-lg font-black text-ink">{formatCurrency(totals.total)}</p>
